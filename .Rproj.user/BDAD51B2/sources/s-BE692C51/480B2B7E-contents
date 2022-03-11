@@ -1,0 +1,38 @@
+rm(list = ls())      
+odk_un <- "myo.minnoo@swisstph.ch"
+odk_pw <- "mXgdg@2021!!"
+fid <- c("mis2022|23_hml" ,"prev_v1")
+fid
+paste(fid, ".svc", sep = "abc")
+url_fid <- paste('http://odk-central.swisstph.ch/v1/projects/17/forms/',
+                fid, "svc", sep = "")
+
+url_fid[2]
+url_fid[1]
+url_fid[1:2]
+
+fs::dir_create("data")
+
+ruODK::ru_setup(
+  svc = url_fid [1],
+  fid = fid[1],
+  un = odk_un,
+  pw = odk_pw,
+  test_fid = fid[1],
+  tz = "Asutralia/Perth",
+  verbose = TRUE
+)
+# create temp folder
+temp <- tempdir()
+temp
+
+#fs::dir_create("raw_data")
+se <- ruODK::submission_export(local_dir = temp, overwrite = TRUE,
+                               verbose = TRUE)
+se
+
+utils::unzip(se, exdir = "data")
+
+
+
+C:/Users/MELVIN~1/AppData/Local/Temp/RtmpQba5Qi
